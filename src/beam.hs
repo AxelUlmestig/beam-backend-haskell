@@ -1,3 +1,9 @@
+module Beam (
+	Beam(..),
+	position,
+	radius
+) where
+
 import Vector
 
 data Beam = Photon Vector Double Double | Beacon [Beam] deriving (Show) 
