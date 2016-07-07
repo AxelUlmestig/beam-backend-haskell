@@ -5,16 +5,16 @@ module Beam (
 	timestamp
 ) where
 
-import Vector
+import qualified Vector
 
-data Beam = Photon Vector Double Int | Beacon [Beam] deriving (Show) 
+data Beam = Photon Vector.Vector Double Int | Beacon [Beam] deriving (Show) 
 
-position :: Beam -> Vector
+position :: Beam -> Vector.Vector
 position (Photon pos _ _) = pos
 position (Beacon photons) = Vector.mul (invertedLen photons) $ foldr addPos zeroVector photons 
 	where 	invert = flip (^^) (-1)
 		invertedLen = invert . fromIntegral . length
-		zeroVector = Vector 0 0
+		zeroVector = Vector.Vector 0 0
 		addPos = Vector.add . position
 
 radius :: Beam -> Double
