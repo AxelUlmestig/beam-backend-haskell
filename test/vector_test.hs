@@ -24,11 +24,17 @@ distanceTC = TestCase $ assertEqual "distance (3, 0) (0, 4)"
 		v2 = Vector 0 4
 		expectedDist = 5
 
+absTC = TestCase $ assertEqual "abs (3, 4)"
+	(Vector.abs v) absValue
+	where 	v = Vector 3 4
+		absValue = 5
+
 -- hUnitTestToTests: Adapt an existing HUnit test into a list of test-framework tests
 tests = hUnitTestToTests $ TestList [
 		TestLabel "add" addTC,
 		TestLabel "mul" mulTC,
-		TestLabel "distance" distanceTC
+		TestLabel "distance" distanceTC,
+		TestLabel "absTC" absTC
 	]
 
 main = defaultMain tests
