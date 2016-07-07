@@ -41,7 +41,13 @@ beaconTimestampTC = TestCase $ assertEqual "timestamp Beacon [3, 7]"
 		tsMax = 7
 		p1 = Photon (Vector 0 0) 0 tsMin
 		p2 = Photon (Vector 0 0) 0 tsMax
-		b= Beacon [p1, p2]
+		b = Beacon [p1, p2]
+
+beamDistanceTC = TestCase $ assertEqual "distance (3, 0) (0, 4)"
+	(Beam.distance b1 b2) dist
+	where 	b1 = Photon (Vector 3 0) 0 0
+		b2 = Photon (Vector 0 4) 0 0
+		dist = 5
 
 -- hUnitTestToTests: Adapt an existing HUnit test into a list of test-framework tests
 tests = hUnitTestToTests $ TestList [
@@ -50,7 +56,8 @@ tests = hUnitTestToTests $ TestList [
 		TestLabel "photonPosTC" photonPosTC,
 		TestLabel "beaconRadTC" beaconRadTC,
 		TestLabel "photonTimestampTC" photonTimestampTC,
-		TestLabel "beaconTimestampTC" beaconTimestampTC
+		TestLabel "beaconTimestampTC" beaconTimestampTC,
+		TestLabel "beamDistanceTC" beamDistanceTC
 	]
 
 main = defaultMain tests

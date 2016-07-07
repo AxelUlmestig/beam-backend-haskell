@@ -2,7 +2,8 @@ module Beam (
 	Beam(..),
 	position,
 	radius,
-	timestamp
+	timestamp,
+	distance
 ) where
 
 import qualified Vector
@@ -25,3 +26,6 @@ radius (Beacon photons) = sqrt $ foldr (addSquare . radius) 0 photons
 timestamp :: Beam -> Int
 timestamp (Photon _ _ ts) = ts
 timestamp (Beacon photons) = foldr (min . timestamp) (maxBound :: Int) photons
+
+distance :: Beam -> Beam -> Double
+distance b1 b2 = Vector.distance (position b1) (position b2)
