@@ -17,6 +17,11 @@ mulTC = TestCase $ assertEqual "2 * (2, 4)"
 		v1 = Vector 2 4
 		v2 = Vector 4 8
 		
+subtractTC = TestCase $ assertEqual "(2, 4) - (2, 3)" 
+	(Vector.subtract v1 v2) v3
+	where	v1 = Vector 2 4
+		v2 = Vector 2 3
+		v3 = Vector 0 1
 
 distanceTC = TestCase $ assertEqual "distance (3, 0) (0, 4)"
 	(distance v1 v2) expectedDist
@@ -33,6 +38,7 @@ absTC = TestCase $ assertEqual "abs (3, 4)"
 tests = hUnitTestToTests $ TestList [
 		TestLabel "add" addTC,
 		TestLabel "mul" mulTC,
+		TestLabel "subtractTC" subtractTC,
 		TestLabel "distance" distanceTC,
 		TestLabel "absTC" absTC
 	]
