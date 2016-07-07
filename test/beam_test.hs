@@ -30,12 +30,27 @@ beaconRadTC = TestCase $ assertEqual "rad Beacon [3, 4]"
 		p2 = Photon v 4 0
 		b = Beacon [p1, p2]
 
+photonTimestampTC = TestCase $ assertEqual "timestamp Photon 7"
+	(timestamp p) ts
+	where 	ts = 7
+		p = Photon (Vector 0 0) 0 ts
+
+beaconTimestampTC = TestCase $ assertEqual "timestamp Beacon [3, 7]"
+	(timestamp b) tsMin
+	where 	tsMin = 3
+		tsMax = 7
+		p1 = Photon (Vector 0 0) 0 tsMin
+		p2 = Photon (Vector 0 0) 0 tsMax
+		b= Beacon [p1, p2]
+
 -- hUnitTestToTests: Adapt an existing HUnit test into a list of test-framework tests
 tests = hUnitTestToTests $ TestList [
 		TestLabel "photonPosTc" photonPosTC,
 		TestLabel "beaconPosTC" beaconPosTC,
 		TestLabel "photonPosTC" photonPosTC,
-		TestLabel "beaconRadTC" beaconRadTC
+		TestLabel "beaconRadTC" beaconRadTC,
+		TestLabel "photonTimestampTC" photonTimestampTC,
+		TestLabel "beaconTimestampTC" beaconTimestampTC
 	]
 
 main = defaultMain tests
