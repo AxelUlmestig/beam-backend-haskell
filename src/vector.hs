@@ -22,7 +22,7 @@ subtract v1 v2 = add v1 (neg v2)
 	where neg = mul (-1)
 
 distance :: Vector -> Vector -> Double
-distance (Vector x1 y1) (Vector x2 y2) = sqrt $ (x1 + x2) ^ 2 + (y1 + y2) ^ 2
+distance v1 v2 = abs $ subtract v1 v2
 
 abs :: Vector -> Double
 abs (Vector x y) = sqrt $ x ^ 2 + y ^ 2
