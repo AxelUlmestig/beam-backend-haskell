@@ -45,3 +45,14 @@ Test-Suite BeamTestSuite
                        HUnit
   default-language:    Haskell2010
   ghc-options: -fno-warn-tabs
+
+Test-Suite ReduceBeamsTestSuite
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test, src
+  main-is:             reduce_beams_test.hs
+  build-depends:       base,
+                       test-framework,
+                       test-framework-hunit,
+                       HUnit
+  default-language:    Haskell2010
+  ghc-options: -fno-warn-tabs
