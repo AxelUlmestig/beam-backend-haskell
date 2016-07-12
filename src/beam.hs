@@ -8,7 +8,7 @@ module Beam (
 
 import qualified Vector
 
-data Beam = Photon Vector.Vector Double Int | Beacon [Beam] deriving (Show) 
+data Beam = Photon Vector.Vector Double Int | Beacon [Beam] deriving (Show, Eq) 
 
 position :: Beam -> Vector.Vector
 position (Photon pos _ _) = pos
