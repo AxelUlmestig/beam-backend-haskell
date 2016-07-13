@@ -11,12 +11,19 @@ photonPosTC = TestCase $ assertEqual "pos Photon (1, 2)"
 	where	p = Photon v 0 0
 		v = Vector 1 2
 
-beaconPosTC = TestCase $ assertEqual "pos Beacon [(0, 0), (2, 4)]"
+beaconPosTC1 = TestCase $ assertEqual "pos Beacon [(0, 0), (2, 4)]"
 	(position beacon) v
 	where	p1 = Photon (Vector 0 0) 1 0
 		p2 = Photon (Vector 2 4) 1 0
 		beacon = Beacon [p1, p2]
 		v = Vector 1 2
+
+beaconPosTC2 = TestCase $ assertEqual "pos Beacon [(0, 0), (0, 4)]"
+	(position beacon) v
+	where	p1 = Photon (Vector 0 0) 3 0
+		p2 = Photon (Vector 0 25) 4 0
+		beacon = Beacon [p1, p2]
+		v = Vector 0 16
 
 photonRadTC = TestCase $ assertEqual "rad Photon (0, 0) 3 0"
 	(radius p) 3
@@ -52,7 +59,8 @@ beamDistanceTC = TestCase $ assertEqual "distance (3, 0) (0, 4)"
 -- hUnitTestToTests: Adapt an existing HUnit test into a list of test-framework tests
 tests = hUnitTestToTests $ TestList [
 		TestLabel "photonPosTc" photonPosTC,
-		TestLabel "beaconPosTC" beaconPosTC,
+		TestLabel "beaconPosTC1" beaconPosTC1,
+		TestLabel "beaconPosTC2" beaconPosTC2,
 		TestLabel "photonPosTC" photonPosTC,
 		TestLabel "beaconRadTC" beaconRadTC,
 		TestLabel "photonTimestampTC" photonTimestampTC,
