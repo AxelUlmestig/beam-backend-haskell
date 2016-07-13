@@ -12,11 +12,14 @@ data Beam = Photon Vector.Vector Double Int | Beacon [Beam] deriving (Show, Eq)
 
 position :: Beam -> Vector.Vector
 position (Photon pos _ _) = pos
-position (Beacon photons) = Vector.mul (invertedLen photons) $ foldr addPos zeroVector photons 
-	where 	invert = flip (^^) (-1)
-		invertedLen = invert . fromIntegral . length
+position (Beacon photons) = (Vector.mul . invert . sum) weights $ foldr Vector.add zeroVector weightedPos 
+	where 	positions = map position photons
+		weights = map weight photons
+		weightedPos = zipWith Vector.mul weights positions
+
+		weight = (flip (^^) 2) . radius
+		invert = flip (^^) (-1)
 		zeroVector = Vector.Vector 0 0
-		addPos = Vector.add . position
 
 radius :: Beam -> Double
 radius (Photon _ rad _) = rad
