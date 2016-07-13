@@ -24,7 +24,7 @@ position (Beacon photons) = (Vector.mul . invert . sum) weights $ foldr Vector.a
 radius :: Beam -> Double
 radius (Photon _ rad _) = rad
 radius (Beacon photons) = sqrt $ foldr (addSquare . radius) 0 photons
-	where	addSquare new old = old + new ^ 2
+	where	addSquare = (+) . (^2)
 
 timestamp :: Beam -> Int
 timestamp (Photon _ _ ts) = ts
