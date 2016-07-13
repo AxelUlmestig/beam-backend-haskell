@@ -13,8 +13,8 @@ photonPosTC = TestCase $ assertEqual "pos Photon (1, 2)"
 
 beaconPosTC = TestCase $ assertEqual "pos Beacon [(0, 0), (2, 4)]"
 	(position beacon) v
-	where	p1 = Photon (Vector 0 0) 0 0
-		p2 = Photon (Vector 2 4) 0 0
+	where	p1 = Photon (Vector 0 0) 1 0
+		p2 = Photon (Vector 2 4) 1 0
 		beacon = Beacon [p1, p2]
 		v = Vector 1 2
 
