@@ -6,11 +6,10 @@ import Beam
 
 reduceBeams :: [Beam] -> [Beam]
 reduceBeams (beam:beams)
-	| once == twice		= once
-	| otherwise	 	= reduceBeams twice
-	where 	
-		once = reduceAll (beam:beams)
-		twice = reduceAll once
+	| original == altered	= original
+	| otherwise	 	= reduceBeams altered
+	where 	original = (beam:beams)
+		altered = reduceAll original
 reduceBeams [] = []
 
 
