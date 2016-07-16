@@ -12,9 +12,9 @@ reduceBeams beams
 
 
 reduceAll :: [Beam] -> [Beam]
-reduceAll (beam:beams) = (head headReduced) : (reduceAll . tail $ headReduced)
-	where 	headReduced = reduceHead (beam:beams)
 reduceAll [] = []
+reduceAll beams = (head headReduced) : (reduceAll . tail $ headReduced)
+	where 	headReduced = reduceHead beams
 
 
 reduceHead :: [Beam] -> [Beam]
