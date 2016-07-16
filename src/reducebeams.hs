@@ -5,12 +5,10 @@ module ReduceBeams (
 import Beam
 
 reduceBeams :: [Beam] -> [Beam]
-reduceBeams (beam:beams)
-	| original == altered	= original
-	| otherwise	 	= reduceBeams altered
-	where 	original = (beam:beams)
-		altered = reduceAll original
 reduceBeams [] = []
+reduceBeams beams
+	| reduceAll beams == beams	= beams
+	| otherwise	 		= reduceBeams . reduceAll $ beams
 
 
 reduceAll :: [Beam] -> [Beam]
