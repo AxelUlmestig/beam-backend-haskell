@@ -17,8 +17,8 @@ position (Beacon photons) = (Vector.mul . invert . sum) weights $ foldr Vector.a
 		weights = map weight photons
 		weightedPos = zipWith Vector.mul weights positions
 
-		weight = (flip (^^) 2) . radius
-		invert = flip (^^) (-1)
+		weight = (^^2) . radius
+		invert = (^^(-1))
 		zeroVector = Vector.Vector 0 0
 
 radius :: Beam -> Double
