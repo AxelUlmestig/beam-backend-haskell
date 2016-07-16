@@ -16,8 +16,8 @@ ageFilterBeam limit (Photon v r ts)
 	| timestamp photon > limit 	= [photon]
 	| otherwise 			= []
 	where 	photon = (Photon v r ts)
-ageFilterBeam limit (Beacon beams)
+ageFilterBeam limit (Beacon b1 b2)
 	| timestamp beacon > limit 	= [beacon]
-	| otherwise			= ageFilterBeams limit beams
-	where 	beacon = (Beacon beams)
+	| otherwise			= ageFilterBeams limit [b1, b2]
+	where 	beacon = (Beacon b1 b2)
 

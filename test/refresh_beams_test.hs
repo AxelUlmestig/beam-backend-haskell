@@ -18,20 +18,20 @@ refreshBeamsTC1 = TestCase $ assertEqual "refreshBeams [old, new]"
 		v = Vector 0 0 
 		limit = 0
 
-refreshBeamsTC2 = TestCase $ assertEqual "refreshBeams [Beacon [old, new]]"
+refreshBeamsTC2 = TestCase $ assertEqual "refreshBeams [Beacon old new]"
 	[p1] (refreshBeams limit [b])
 	where 	p1 = Photon v 1 1
 		p2 = Photon v 1 0
-		b = Beacon [p1, p2]
+		b = Beacon p1 p2
 		v = Vector 0 0 
 		limit = 0
 
-refreshBeamsTC3 = TestCase $ assertEqual "refreshBeams [Beacon [new, Beacon [new, old]]"
-	[Beacon [p1, p1]] (refreshBeams limit [b2])
+refreshBeamsTC3 = TestCase $ assertEqual "refreshBeams [Beacon new (Beacon new old)]"
+	[Beacon p1 p1] (refreshBeams limit [b2])
 	where 	p1 = Photon v 1 1
 		p2 = Photon v 1 0
-		b1 = Beacon [p1, p2]
-		b2 = Beacon [p1, b1]
+		b1 = Beacon p1 p2
+		b2 = Beacon p1 b1
 		v = Vector 0 0 
 		limit = 0
 

@@ -15,14 +15,14 @@ beaconPosTC1 = TestCase $ assertEqual "pos Beacon [(0, 0), (2, 4)]"
 	v (position beacon) 
 	where	p1 = Photon (Vector 0 0) 1 0
 		p2 = Photon (Vector 2 4) 1 0
-		beacon = Beacon [p1, p2]
+		beacon = Beacon p1 p2
 		v = Vector 1 2
 
 beaconPosTC2 = TestCase $ assertEqual "pos Beacon [(0, 0), (0, 4)]"
 	v (position beacon) 
 	where	p1 = Photon (Vector 0 0) 3 0
 		p2 = Photon (Vector 0 25) 4 0
-		beacon = Beacon [p1, p2]
+		beacon = Beacon p1 p2
 		v = Vector 0 16
 
 photonRadTC = TestCase $ assertEqual "rad Photon (0, 0) 3 0"
@@ -35,7 +35,7 @@ beaconRadTC = TestCase $ assertEqual "rad Beacon [3, 4]"
 	where 	v = Vector 0 0
 		p1 = Photon v 3 0
 		p2 = Photon v 4 0
-		b = Beacon [p1, p2]
+		b = Beacon p1 p2
 
 photonTimestampTC = TestCase $ assertEqual "timestamp Photon 7"
 	ts (timestamp p) 
@@ -48,7 +48,7 @@ beaconTimestampTC = TestCase $ assertEqual "timestamp Beacon [3, 7]"
 		tsMax = 7
 		p1 = Photon (Vector 0 0) 0 tsMin
 		p2 = Photon (Vector 0 0) 0 tsMax
-		b = Beacon [p1, p2]
+		b = Beacon p1 p2
 
 beamDistanceTC = TestCase $ assertEqual "distance (3, 0) (0, 4)"
 	dist (Beam.distance b1 b2) 
