@@ -1,10 +1,10 @@
 module Vector (
-	Vector(..),
-	add,
-	mul,
-	subtract,
-	distance,
-	abs
+        Vector(..),
+        add,
+        mul,
+        subtract,
+        distance,
+        abs
 ) where
 
 import Prelude hiding (abs, subtract)
@@ -19,7 +19,7 @@ mul factor (Vector x y) = Vector (factor * x) (factor * y)
 
 subtract :: Vector -> Vector -> Vector
 subtract v1 v2 = add v1 (neg v2)
-	where neg = mul (-1)
+        where neg = mul (-1)
 
 distance :: Vector -> Vector -> Double
 distance v1 v2 = abs $ subtract v1 v2

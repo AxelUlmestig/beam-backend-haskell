@@ -1,5 +1,5 @@
 module RefreshBeams (
-	refreshBeams
+        refreshBeams
 ) where
 
 import Beam
@@ -13,11 +13,11 @@ ageFilterBeams limit beams = foldr ((++) . ageFilterBeam limit) [] beams
 
 ageFilterBeam :: Int -> Beam -> [Beam]
 ageFilterBeam limit (Photon v r ts) 
-	| timestamp photon > limit 	= [photon]
-	| otherwise 			= []
-	where 	photon = (Photon v r ts)
+        | timestamp photon > limit      = [photon]
+        | otherwise                     = []
+        where   photon = (Photon v r ts)
 ageFilterBeam limit (Beacon b1 b2)
-	| timestamp beacon > limit 	= [beacon]
-	| otherwise			= ageFilterBeams limit [b1, b2]
-	where 	beacon = (Beacon b1 b2)
+        | timestamp beacon > limit      = [beacon]
+        | otherwise                     = ageFilterBeams limit [b1, b2]
+        where   beacon = (Beacon b1 b2)
 
