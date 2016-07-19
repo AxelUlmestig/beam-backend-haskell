@@ -1,6 +1,7 @@
 import Control.Monad.State  
 import Data.Time.Clock.POSIX
 import Control.Concurrent
+import System.IO
 
 import Vector
 import Beam
@@ -15,12 +16,13 @@ main = runStateT beamIO [] >> return ()
  
 beamIO :: StateT Beams IO ()
 beamIO = do
-        io $ putStr "Please provide coordinates for a new Beam: "
-        coords <- io getCoords
+        input <- io $ prompt "Please provide coordinates for a new Beam: "
         ts <- io getTS
-        addBeam coords ts
+        addBeam (toVector input) ts
         beams <- get
         io . print . present $ beams
+        --io . doLater Constants.ageLimit . print $ refreshBeams ts beams
+        io . doLater (10 ^ 6) . print $ refreshBeams ts beams
         beamIO
 
 addBeam :: Vector -> Int -> StateT Beams IO ()
@@ -42,14 +44,16 @@ getTS = fmap round getPOSIXTime
 io :: IO a -> StateT Beams IO a
 io = liftIO
 
-getCoords :: IO Vector
-getCoords = do
-        let toDouble x = read x :: Double
-        let toDoubles = map toDouble . words
-        let listToVector (lat:lon:[]) = Vector lat lon
-        let toVector = listToVector . toDoubles
-        str <- getLine
-        return $ toVector str
+prompt :: String -> IO String
+prompt text = do
+    putStr text
+    hFlush stdout
+    getLine
+
+toVector :: String -> Vector
+toVector = listToVector . toDoubles
+        where   toDoubles = map read . words
+                listToVector (lat:lon:[]) = Vector lat lon
 
 doLater :: Int -> IO () -> IO ThreadId
-doLater ms io = forkIO $ threadDelay (ms * 1000) >> io
+doLater t io = forkIO $ threadDelay t >> io
