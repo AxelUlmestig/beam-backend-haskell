@@ -18,18 +18,18 @@ main = do
 mainLoop :: Beams.Beams -> IO ()
 mainLoop beams = do
         input <- liftIO $ prompt "Please provide coordinates for a new Beam: "
-        addBeam input beams
+        addBeam beams input 
         setRefreshTimer beams
         mainLoop beams
 
-addBeam input beams = do
+addBeam beams input = do
         forkIO $ do 
-                Beams.addBeam (toVector input) beams
-                Beams.output print beams
+                Beams.addBeam beams (toVector input) 
+                Beams.output beams print
 
 setRefreshTimer beams = doLater (Constants.ageLimit * 10 ^ 6) $ do 
         Beams.refresh beams
-        Beams.output print beams
+        Beams.output beams print
 
 prompt :: String -> IO String
 prompt text = do

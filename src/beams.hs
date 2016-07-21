@@ -25,8 +25,8 @@ new = do
         m <- newMVar []
         return (Beams m)
 
-addBeam :: Vector -> Beams -> IO ()
-addBeam coords (Beams m) = do
+addBeam :: Beams -> Vector -> IO ()
+addBeam (Beams m) coords = do
         ts <- getTS
         beams <- takeMVar m
         putMVar m (reduceBeams $ (Photon coords Constants.radius ts) : beams)
@@ -37,8 +37,8 @@ refresh (Beams m) = do
         beams <- takeMVar m
         putMVar m (refreshBeams (ts - Constants.ageLimit) beams)
 
-output :: (String -> IO ()) -> Beams -> IO ()
-output io (Beams m) = do
+output :: Beams -> (String -> IO ()) -> IO ()
+output (Beams m) io = do
         beams <- takeMVar m
         putMVar m beams
         io . present $ beams
