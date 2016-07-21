@@ -33,9 +33,9 @@ setRefreshTimer beams = doLater (Constants.ageLimit * 10 ^ 6) $ do
 
 prompt :: String -> IO String
 prompt text = do
-    putStr text
-    hFlush stdout
-    getLine
+        putStr text
+        hFlush stdout
+        getLine
 
 doLater :: Int -> IO () -> IO ThreadId
 doLater t io = forkIO $ threadDelay t >> io
