@@ -6,9 +6,7 @@ module Beams (
         output
 ) where 
 
-import Control.Monad.State  
 import Control.Concurrent
-import Control.Monad
 import Data.Time.Clock.POSIX
 import System.IO
 import Data.List
