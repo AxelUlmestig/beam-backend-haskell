@@ -11,6 +11,7 @@ import Control.Concurrent
 import Control.Monad
 import Data.Time.Clock.POSIX
 import System.IO
+import Data.List
 
 import Vector
 import Beam
@@ -45,9 +46,14 @@ output (Beams m) io = do
         hFlush stdout
 
 present :: [Beam] -> String
-present = show . map showBeam
-        where   showBeams = show . map showBeam
-                showBeam beam = (getX . position $ beam, getY . position $ beam, radius beam)
+present = addBrackets . intercalate ", " . map beamToJSON
+        where   addBrackets str = "[" ++ str ++ "]"
+
+beamToJSON :: Beam -> String
+beamToJSON beam = "{\"lat\": " ++ x ++ ", \"lon\": " ++ y ++ ", \"radius\": " ++ rad ++ "}"
+        where   x = show . getX . position $ beam
+                y = show . getY . position $ beam
+                rad = show . radius $ beam
                 getX (Vector x y) = x
                 getY (Vector x y) = y
 
