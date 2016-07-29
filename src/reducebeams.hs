@@ -30,4 +30,4 @@ reduceHead (beam:beams) = reduceHeadRec [] beam beams
 shouldMerge :: Beam -> Beam -> Bool
 shouldMerge b1 b2 = (joinedRad b1 b2) >= (groupRad b1 b2)
         where   joinedRad b1 b2 = radius $ Beacon b1 b2
-                groupRad b1 b2 = (/2) $ (radius b1) + (radius b2) + (distance b1 b2)
+                groupRad b1 b2 = (/2) $ radius b1 + radius b2 + distance b1 b2
