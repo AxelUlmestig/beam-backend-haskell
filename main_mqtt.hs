@@ -38,14 +38,9 @@ handleMsg config beams input = do
 
 addBeam config beams input = do
         forkIO $ do 
-                Beams.addBeam beams (toVector input) 
+                Beams.addBeam beams input
                 Beams.output beams $ publish config publishTopic
 
-toVector :: String -> Vector
-toVector = listToVector . toDoubles
-        where   toDoubles = map read . words
-                listToVector (lat:lon:[]) = Vector lat lon
-        
 setRefreshTimer config beams = doLater (Constants.ageLimit * 10 ^ 6) $ do 
         Beams.refresh beams
         Beams.output beams $ publish config publishTopic

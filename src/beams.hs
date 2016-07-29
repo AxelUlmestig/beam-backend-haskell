@@ -6,10 +6,15 @@ module Beams (
         output
 ) where 
 
+--MVar stuff
 import Control.Concurrent
 import Data.Time.Clock.POSIX
 import System.IO
 import Data.List
+--RegEx stuff
+import Data.Array
+import Text.Regex 
+import Text.Regex.Base
 
 import Vector
 import Beam
@@ -24,11 +29,14 @@ new = do
         m <- newMVar []
         return (Beams m)
 
-addBeam :: Beams -> Vector -> IO ()
-addBeam (Beams m) coords = do
-        ts <- getTS
-        beams <- takeMVar m
-        putMVar m (reduceBeams $ (Photon coords Constants.radius ts) : beams)
+addBeam :: Beams -> String -> IO ()
+addBeam (Beams m) coords = createBeam . getCoords $ coords
+        where   createBeam (Just v) = do
+                        ts <- getTS
+                        beams <- takeMVar m
+                        putMVar m (reduceBeams $ (Photon v Constants.radius ts) : beams)
+                createBeam Nothing = do
+                        return ()
 
 refresh :: Beams -> IO ()
 refresh (Beams m) = do
@@ -57,3 +65,17 @@ beamToJSON beam = "{\"lat\": " ++ x ++ ", \"lon\": " ++ y ++ ", \"radius\": " ++
 
 getTS :: IO Int
 getTS = fmap round getPOSIXTime
+
+regex = mkRegex "^([+-]?([0-9]*\\.)?[0-9]+) ([+-]?([0-9]*\\.)?[0-9]+)$"
+
+isValid :: String -> Bool
+isValid = matchTest regex
+
+extractCoords :: String -> Vector
+extractCoords str = Vector (li !! 1) (li !! 3)
+        where li = map read . map fst . elems . head $ matchAllText regex str
+
+getCoords :: String -> Maybe Vector
+getCoords str
+        | isValid str   = Just $ extractCoords str
+        | otherwise     = Nothing
