@@ -6,7 +6,6 @@ import Control.Concurrent
 import MQTTWrapper
 import qualified Constants
 import qualified Beams
-import Vector
 
 listenTopic, publishTopic :: Topic
 listenTopic = "topic1"
