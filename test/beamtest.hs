@@ -1,5 +1,7 @@
-module Main where
-import Test.Framework
+module BeamTest(
+        tests
+) where
+
 import Test.Framework.Providers.HUnit
 import Test.HUnit
 
@@ -56,7 +58,6 @@ beamDistanceTC = TestCase $ assertEqual "distance (3, 0) (0, 4)"
                 b2 = Photon (Vector 0 4) 0 0
                 dist = 5
 
--- hUnitTestToTests: Adapt an existing HUnit test into a list of test-framework tests
 tests = hUnitTestToTests $ TestList [
                 TestLabel "photonPosTc" photonPosTC,
                 TestLabel "beaconPosTC1" beaconPosTC1,
@@ -67,5 +68,3 @@ tests = hUnitTestToTests $ TestList [
                 TestLabel "beaconTimestampTC" beaconTimestampTC,
                 TestLabel "beamDistanceTC" beamDistanceTC
         ]
-
-main = defaultMain tests

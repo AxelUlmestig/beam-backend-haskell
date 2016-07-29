@@ -1,5 +1,7 @@
-module Main where
-import Test.Framework
+module RefreshBeamsTest(
+        tests
+) where
+
 import Test.Framework.Providers.HUnit
 import Test.HUnit
 
@@ -35,12 +37,10 @@ refreshBeamsTC3 = TestCase $ assertEqual "refreshBeams [Beacon new (Beacon new o
                 v = Vector 0 0 
                 limit = 0
 
--- hUnitTestToTests: Adapt an existing HUnit test into a list of test-framework tests
+
 tests = hUnitTestToTests $ TestList [
                 TestLabel "refreshBeamsEmptyTC" refreshBeamsEmptyTC,
                 TestLabel "refreshBeamsTC1" refreshBeamsTC1,
                 TestLabel "refreshBeamsTC2" refreshBeamsTC2,
                 TestLabel "refreshBeamsTC3" refreshBeamsTC3
         ]
-
-main = defaultMain tests

@@ -25,43 +25,10 @@ executable beam-backend
   default-language:    Haskell2010
   ghc-options: -fno-warn-tabs
 
-Test-Suite VectorTestSuite
+Test-Suite TestSuite
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test, src
-  main-is:             vector_test.hs
-  build-depends:       base,
-                       test-framework,
-                       test-framework-hunit,
-                       HUnit
-  default-language:    Haskell2010
-  ghc-options: -fno-warn-tabs
-
-Test-Suite BeamTestSuite
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test, src
-  main-is:             beam_test.hs
-  build-depends:       base,
-                       test-framework,
-                       test-framework-hunit,
-                       HUnit
-  default-language:    Haskell2010
-  ghc-options: -fno-warn-tabs
-
-Test-Suite ReduceBeamsTestSuite
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test, src
-  main-is:             reduce_beams_test.hs
-  build-depends:       base,
-                       test-framework,
-                       test-framework-hunit,
-                       HUnit
-  default-language:    Haskell2010
-  ghc-options: -fno-warn-tabs
-
-Test-Suite RefreshBeamsTestSuite
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test, src
-  main-is:             refresh_beams_test.hs
+  main-is:             testmain.hs
   build-depends:       base,
                        test-framework,
                        test-framework-hunit,

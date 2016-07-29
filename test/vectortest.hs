@@ -1,7 +1,10 @@
-module Main where
-import Test.Framework
+module VectorTest(
+        tests
+) where
+
 import Test.Framework.Providers.HUnit
 import Test.HUnit
+
 import Vector
 
 addTC = TestCase $ assertEqual "(3, 0) + (1, 1)"
@@ -34,7 +37,6 @@ absTC = TestCase $ assertEqual "abs (3, 4)"
         where   v = Vector 3 4
                 absValue = 5
 
--- hUnitTestToTests: Adapt an existing HUnit test into a list of test-framework tests
 tests = hUnitTestToTests $ TestList [
                 TestLabel "add" addTC,
                 TestLabel "mul" mulTC,
@@ -42,5 +44,3 @@ tests = hUnitTestToTests $ TestList [
                 TestLabel "distance" distanceTC,
                 TestLabel "absTC" absTC
         ]
-
-main = defaultMain tests

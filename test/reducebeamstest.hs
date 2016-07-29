@@ -1,5 +1,7 @@
-module Main where
-import Test.Framework
+module ReduceBeamsTest(
+        tests
+) where
+
 import Test.Framework.Providers.HUnit
 import Test.HUnit
 
@@ -33,7 +35,6 @@ reduceBeamsTC4 = TestCase $ assertEqual "reduceBeams [p1, p2, p2]"
                 p2 = Photon (Vector 3 3) 3 0
                 merged = Beacon p2 p2
 
--- hUnitTestToTests: Adapt an existing HUnit test into a list of test-framework tests
 tests = hUnitTestToTests $ TestList [
                 TestLabel "reduceBeamsEmptyTC" reduceBeamsEmptyTC,
                 TestLabel "reduceBeamsTC1" reduceBeamsTC1,
@@ -41,5 +42,3 @@ tests = hUnitTestToTests $ TestList [
                 TestLabel "reduceBeamsTC3" reduceBeamsTC3,
                 TestLabel "reduceBeamsTC4" reduceBeamsTC4
         ]
-
-main = defaultMain tests
