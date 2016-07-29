@@ -1,5 +1,3 @@
-{-# Language DataKinds, OverloadedStrings #-}
-
 module Main where
 import Control.Concurrent
 
@@ -8,10 +6,8 @@ import qualified Constants
 import qualified Beams
 
 listenTopic, publishTopic :: Topic
-listenTopic = "topic1"
-publishTopic = "topic2"
---listenTopic = Constants.listenTopic
---publishTopic = Constants.publishTopic
+listenTopic = Constants.listenTopic
+publishTopic = Constants.publishTopic
 
 host :: String
 host = Constants.mqttHost
