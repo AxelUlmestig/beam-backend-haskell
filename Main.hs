@@ -16,6 +16,7 @@ main :: IO ()
 main = do
         conf <- getConfig host
         forkIO $ runMQTT conf
+        qosGranted <- subscribe conf listenTopic
         beams <- Beams.new
         mainLoop conf beams
 
