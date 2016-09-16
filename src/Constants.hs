@@ -9,4 +9,4 @@ ageLimit = 10 :: Int
 
 listenTopic = "topic1" :: Topic
 publishTopic = "topic2" :: Topic
-mqttHost = "test.mosquitto.org" 
+mqttHost = "broker.mqttdashboard.com" 
