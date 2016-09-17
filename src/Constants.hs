@@ -7,6 +7,6 @@ radius = 5.0 :: Double
 --ageLimit = 5 * 60 :: Int
 ageLimit = 10 :: Int
 
-listenTopic = "topic1" :: Topic
-publishTopic = "topic2" :: Topic
+listenTopic = "beam:publish" :: Topic
+publishTopic = "beam:listen" :: Topic
 mqttHost = "broker.mqttdashboard.com" 
