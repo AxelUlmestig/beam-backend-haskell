@@ -20,7 +20,7 @@ executable beam-backend
   hs-source-dirs:      src, .
   -- other-modules:       
   -- other-extensions:    
-  build-depends:       base >=4.8 && <4.9, stm >=2.4 && <2.5, bytestring >=0.10 && <0.11, network >=2.6 && <2.7, text >=1.2 && <1.3, async >=2.0 && <2.1, transformers >=0.4 && <0.5, mtl >=2.2 && <2.3, attoparsec >=0.13 && <0.14, mqtt-hs, time, array, regex-compat, regex-base
+  build-depends:       base >=4.8 && <4.9, stm >=2.4 && <2.5, bytestring >=0.10 && <0.11, network >=2.6 && <2.7, text >=1.2 && <1.3, async >=2.0, transformers >=0.4 && <0.5, mtl >=2.2 && <2.3, attoparsec >=0.13 && <0.14, mqtt-hs, time, array, regex-compat, regex-base
   -- hs-source-dirs:      
   default-language:    Haskell2010
   ghc-options: -fno-warn-tabs
